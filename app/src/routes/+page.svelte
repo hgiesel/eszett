@@ -3,7 +3,13 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcomeFallback from '$lib/images/svelte-welcome.png';
 
-	import { Counter as CounterC} from "@hgiesel/eszett-client-web"
+	import { Counter as CounterC } from "@hgiesel/eszett-client-web"
+	import * as f from "@hgiesel/eszett-client-web"
+	import { onMount } from 'svelte';
+
+	onMount(async () => {
+		console.log(await f.query_foo("hgiesel/eszett"))
+	})
 
 	function createCounter() {
 		let counter = $state(new CounterC());

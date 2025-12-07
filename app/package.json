@@ -42,6 +42,6 @@
 		]
 	},
 	"dependencies": {
-		"@hgiesel/eszett-client-web": "0.1.1"
+		"@hgiesel/eszett-client-web": "^0.1.2"
 	}
 }
