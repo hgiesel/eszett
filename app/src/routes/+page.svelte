@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
+		f.Foobar.English
 		console.log(await f.query_foo("hgiesel/eszett"))
 	})
 

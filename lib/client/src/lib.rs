@@ -1,3 +1,4 @@
+use tsify::Tsify;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{Request, RequestInit, RequestMode, Response};
@@ -7,7 +8,28 @@ pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 
-#[wasm_bindgen]
+#[derive(Tsify)]
+#[tsify(namespace)]
+#[serde(tag = "type", rename_all_fields = "camelCase")]
+pub enum Color {
+    Red,
+    Green,
+    Blue
+}
+
+#[derive(Tsify)]
+#[tsify(namespace)]
+#[serde(tag = "type", rename_all_fields = "camelCase")]
+pub enum Shape {
+    Color { primary_color: Color },
+    Circle { r: f64 },
+    Rectangle { x: f64, y: f64 },
+    Triangle { a: f64, b: f64, c: f64 },
+}
+
+#[derive(Tsify)]
+#[tsify(namespace)]
+#[serde(tag = "type", rename_all_fields = "camelCase")]
 pub enum Foobar {
     English,
     Latin,
@@ -41,6 +63,7 @@ pub async fn query_foo(repo: String) -> Result<JsValue, JsValue> {
     Ok(json)
 }
 
+#[derive(Tsify)]
 #[wasm_bindgen]
 pub struct Counter {
     value: i32,
