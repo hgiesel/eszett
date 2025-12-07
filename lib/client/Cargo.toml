@@ -1,8 +1,8 @@
 [package]
-name = "eszett-client-web"
+name = "eszett-client"
 version = "0.1.0"
 edition = "2024"
-description = "Backend for eszett"
+description = "Client for querying Eszett Lib"
 repository = "https://github.com/hgiesel/eszett"
 license = "MIT"
 publish = false
@@ -11,10 +11,11 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-tokio = { workspace = true }
-sqlx = { workspace = true }
 eszett-base = { workspace = true }
+js-sys = { workspace = true }
 wasm-bindgen = { workspace = true }
+wasm-bindgen-futures = { workspace = true }
+web-sys = { workspace = true }
 
 [dev-dependencies]
 wasm-bindgen-test = { workspace = true }

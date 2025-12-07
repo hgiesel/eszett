@@ -19,6 +19,6 @@ async fn query() -> Result<(), sqlx::Error> {
 
 #[tokio::main]
 async fn main() {
-    let x = eszett_base::language::Language::Arabic;
+    let _x = eszett_base::language::Language::Arabic;
     query().await.unwrap()
 }
