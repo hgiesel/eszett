@@ -1,0 +1,125 @@
+type: spec.insomnia.rest/5.0
+schema_version: "5.1"
+name: Eszett Lib Server API
+meta:
+  id: wrk_58f517756dd14885b1389bb406cc9eda
+  created: 1765134084586
+  modified: 1765134265666
+  description: ""
+collection:
+  - name: root
+    meta:
+      id: fld_73e8919103a74de3a7a3e18e6ae5d11a
+      created: 1765134356778
+      modified: 1765134356778
+      sortKey: -1765134356778
+      description: ""
+    children:
+      - url: http://localhost:3000
+        name: Root endpoint
+        meta:
+          id: req_cb97077fa24e4afdbb4e1b739ca2c9b8
+          created: 1765134356779
+          modified: 1765134376918
+          isPrivate: false
+          description: Returns a simple JSON message.
+          sortKey: -1765134356779
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_b8ae578abac5b5f985f9183111d98a3c4139f16e
+    created: 1765134084595
+    modified: 1765134084595
+environments:
+  name: Base Environment
+  meta:
+    id: env_b8ae578abac5b5f985f9183111d98a3c4139f16e
+    created: 1765134084594
+    modified: 1765134356777
+    isPrivate: false
+  data:
+    base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+  subEnvironments:
+    - name: OpenAPI env null
+      meta:
+        id: env_b715ca53a9f7404a99721d1c29b55483
+        created: 1765134356778
+        modified: 1765134356778
+        isPrivate: false
+        sortKey: 1765134356778
+      data:
+        scheme:
+          - http
+        base_path: ""
+        host: ""
+spec:
+  contents:
+    openapi: 3.1.1
+    info:
+      title: Minimal API
+      version: 1.0.0
+      description: The simplest useful OpenAPI 3.0.4 specification.
+      contact:
+        url: https://github.com/hgiesel/eszett/lib/server
+    servers:
+      - url: http://localhost:3000
+    tags:
+      - name: root
+    paths:
+      /:
+        get:
+          summary: Root endpoint
+          operationId: root
+          tags:
+            - root
+          description: Returns a simple Hello world.
+          responses:
+            "200":
+              description: OK
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    const: Hello, world!
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/User"
+    components:
+      schemas:
+        User:
+          type: object
+          required:
+            - id
+            - email
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Unique identifier for the user
+            email:
+              type: string
+              format: email
+            name:
+              type: string
+              nullable: true
+            lastModd:
+              type: string
+              format: date-time
+          example:
+            id: 26bf9d4a-58be-4e4e-a8f2-473f0cb9d092
+            email: user@example.com
+            name: Alice
+            modifiedAt: 2025-01-01T10:00:00Z
+  meta:
+    id: spc_f8a674c72b91465e8ef444097a5fa389
+    created: 1765134084592
+    modified: 1765135535795
