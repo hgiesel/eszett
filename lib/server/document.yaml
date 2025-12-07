@@ -4,8 +4,8 @@ name: Eszett Lib Server API
 meta:
   id: wrk_58f517756dd14885b1389bb406cc9eda
   created: 1765134084586
-  modified: 1765134265666
-  description: ""
+  modified: 1765135687918
+  description: This is the documentation for the Eszett Lib Server API
 collection:
   - name: root
     meta:
@@ -122,4 +122,4 @@ spec:
   meta:
     id: spc_f8a674c72b91465e8ef444097a5fa389
     created: 1765134084592
-    modified: 1765135535795
+    modified: 1765135687917
