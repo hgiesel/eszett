@@ -311,9 +311,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "eszett-base"
+version = "0.0.0"
+
+[[package]]
 name = "eszett-client-web"
 version = "0.1.0"
 dependencies = [
+ "eszett-base",
  "sqlx",
  "tokio",
  "wasm-bindgen",

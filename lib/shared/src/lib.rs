@@ -5,6 +5,12 @@ pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 
+// #[wasm_bindgen]
+// pub enum Foobar {
+//     English,
+//     Latin,
+// }
+
 #[wasm_bindgen]
 pub struct Counter {
     value: i32,
