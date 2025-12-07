@@ -1,0 +1,19 @@
+[package]
+name = "eszett-client-web"
+version = "0.1.0"
+edition = "2024"
+description = "Backend for eszett"
+repository = "https://github.com/hgiesel/eszett"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+tokio = { version = "1.48.0", features = ["full"] }
+sqlx = { version = "0.8", features = [ "runtime-tokio", "tls-native-tls", "postgres" ] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

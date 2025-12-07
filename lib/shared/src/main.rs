@@ -19,5 +19,5 @@ async fn query() -> Result<(), sqlx::Error> {
 
 #[tokio::main]
 async fn main() {
-    query().await.unwrap();
+    query().await.unwrap()
 }
