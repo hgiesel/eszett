@@ -1,0 +1,57 @@
+type: spec.insomnia.rest/5.0
+schema_version: "5.1"
+name: Eszett Lib Server API
+meta:
+  id: wrk_58f517756dd14885b1389bb406cc9eda
+  created: 1765134084586
+  modified: 1765134084586
+  description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_b8ae578abac5b5f985f9183111d98a3c4139f16e
+    created: 1765134084595
+    modified: 1765134084595
+environments:
+  name: Base Environment
+  meta:
+    id: env_b8ae578abac5b5f985f9183111d98a3c4139f16e
+    created: 1765134084594
+    modified: 1765134084594
+    isPrivate: false
+spec:
+  contents:
+    openapi: 3.0.4
+    info:
+      title: Minimal API
+      version: 1.0.0
+      description: The simplest useful OpenAPI 3.0.4 specification.
+    servers:
+      - url: /
+    tags:
+      - name: root
+    paths:
+      /:
+        get:
+          summary: Root endpoint
+          operationId: root
+          tags:
+            - root
+          description: Returns a simple JSON message.
+          responses:
+            "200":
+              description: OK
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Hello, world!
+                    required:
+                      - message
+  meta:
+    id: spc_f8a674c72b91465e8ef444097a5fa389
+    created: 1765134084592
+    modified: 1765134134254
