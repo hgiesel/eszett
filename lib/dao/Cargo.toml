@@ -6,6 +6,9 @@ repository = "https://github.com/hgiesel/eszett/tree/main/lib/dao"
 license = "MIT"
 publish = false
 
+[profile.dev.package.sqlx-macros]
+opt-level = 3
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 
