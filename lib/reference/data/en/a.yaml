@@ -1,0 +1,40 @@
+"apple":
+- [ "noun", []]
+"argument":
+- ["noun", ["~"]]
+"abide":
+- ["verb", ["+", "+", "abode", "past=+", "past=abid", "past_ptc=++", "past_ptc=abidden", "past_ptc_qual=rare"]]
+"add":
+- ["verb", []]
+"advise":
+- ["verb", []]
+"accelerate":
+- ["verb", []]
+"affect":
+- ["verb", []]
+"accept":
+- ["verb", []]
+"address":
+- ["noun", []]
+- ["verb", ["past=addrest", "past_qual=obsolete"]]
+"allow":
+- [ "verb", [ ] ]
+"ability":
+- [ "noun", [ "~" ] ]
+"accident":
+- ["noun", ["~"]]
+"adventure":
+- ["noun", ["~"]]
+- ["verb", []]
+"amount":
+- [ "noun", [ ] ]
+- [ "verb", [ ] ]
+"author":
+- [ "noun", [ ] ]
+- [ "verb", [ ] ]
+"able":
+- ["adj", ["er"]]
+"anxious":
+- ["noun", ["-"]]
+"angry":
+- ["adj", ["er", "more"]]

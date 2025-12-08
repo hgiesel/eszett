@@ -1,0 +1,14 @@
+[package]
+name = "reference"
+version = "0.1.0"
+edition = "2024"
+description = "Backend for eszett"
+repository = "https://github.com/hgiesel/eszett"
+license = "MIT"
+publish = false
+
+[dependencies]
+glob = "0.3.3"
+serde_yaml = { workspace = true }
+project-root = "0.2.2"
+anyhow = { workspace = true }
