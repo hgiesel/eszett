@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO terms (language_id, term)\n        VALUES ( $1, $2 )\n        ON CONFLICT (language_id, term)\n        DO UPDATE SET term = EXCLUDED.term\n        RETURNING id\n    ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "ef19eca96569141381dfc3ee6d7fc36b1b6fae6e1ddb4bf172d2b922f39f8e8a"
+}

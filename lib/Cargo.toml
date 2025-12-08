@@ -10,6 +10,7 @@ members = [
 
 [workspace.dependencies]
 eszett-base = { path = "./base" }
+indoc = "2.0.7"
 js-sys = "0.3.83"
 sqlx = { version = "0.8", features = [ "runtime-tokio", "tls-native-tls", "postgres" ] }
 tokio = { version = "1.48.0", features = ["full"] }
