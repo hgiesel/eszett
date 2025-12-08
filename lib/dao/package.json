@@ -1,0 +1,6 @@
+{
+    "name": "@hgiesel/eszett-client-web",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    }
+}

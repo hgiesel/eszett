@@ -21,6 +21,7 @@ pub enum Color {
 #[tsify(namespace)]
 #[serde(tag = "type", rename_all_fields = "camelCase")]
 pub enum Shape {
+    #[serde(skip_deserializing)]
     Color { primary_color: Color },
     Circle { r: f64 },
     Rectangle { x: f64, y: f64 },
@@ -63,7 +64,6 @@ pub async fn query_foo(repo: String) -> Result<JsValue, JsValue> {
     Ok(json)
 }
 
-#[derive(Tsify)]
 #[wasm_bindgen]
 pub struct Counter {
     value: i32,
@@ -86,4 +86,3 @@ impl Counter {
         self.value
     }
 }
-

@@ -1,0 +1,18 @@
+[package]
+name = "eszett-dao"
+version = "0.1.0"
+edition = "2024"
+description = "Backend for eszett"
+repository = "https://github.com/hgiesel/eszett"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+anyhow = { workspace = true }
+dotenvy = { workspace = true }
+eszett-base = { workspace = true }
+sqlx = { workspace = true }
+tokio = { workspace = true }
