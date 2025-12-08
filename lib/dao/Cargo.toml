@@ -1,5 +1,5 @@
 [package]
-name = "eszett-dao"
+name = "dao"
 edition = "2024"
 description = "Data access layer for Eszett Lib Server"
 repository = "https://github.com/hgiesel/eszett/tree/main/lib/dao"

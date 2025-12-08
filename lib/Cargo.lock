@@ -249,6 +249,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "dao"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "dotenvy",
+ "eszett-base",
+ "sqlx",
+ "tokio",
+]
+
+[[package]]
 name = "der"
 version = "0.7.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -342,22 +353,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "eszett-dao"
-version = "0.0.0"
-dependencies = [
- "anyhow",
- "dotenvy",
- "eszett-base",
- "sqlx",
- "tokio",
-]
-
-[[package]]
 name = "eszett-server"
 version = "0.1.0"
 dependencies = [
  "axum",
- "eszett-dao",
+ "dao",
  "serde",
  "tokio",
  "tracing-subscriber",
