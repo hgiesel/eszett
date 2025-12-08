@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        INSERT INTO terms (language_id, term)\n        VALUES ( $1, $2 )\n        RETURNING id\n    ",
+  "query": "\n        INSERT INTO lemmas (term_id) VALUES ( $1 )\n        ON CONFLICT(term_id) DO UPDATE\n        SET term_id = EXCLUDED.term_id\n        RETURNING id;\n    ",
   "describe": {
     "columns": [
       {
@@ -9,7 +9,7 @@
         "type_info": "Int4",
         "origin": {
           "Table": {
-            "table": "terms",
+            "table": "lemmas",
             "name": "id"
           }
         }
@@ -17,13 +17,12 @@
     ],
     "parameters": {
       "Left": [
-        "Int4",
-        "Text"
+        "Int4"
       ]
     },
     "nullable": [
       false
     ]
   },
-  "hash": "ac7849f2c3874572bff097d2218f9f95b68c54cb629319d1a3c6c735d150b456"
+  "hash": "f44c1b4d791b7ca9623baefd28af36c71222d016a423942e0cf25ba4390fd046"
 }

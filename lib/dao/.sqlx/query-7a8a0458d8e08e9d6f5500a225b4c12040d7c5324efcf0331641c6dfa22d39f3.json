@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        INSERT INTO terms (language_id, term)\n        VALUES ( $1, $2 )\n        RETURNING id\n    ",
+  "query": "\n        SELECT id FROM lemmas\n        WHERE term_id = $1;\n    ",
   "describe": {
     "columns": [
       {
@@ -9,7 +9,7 @@
         "type_info": "Int4",
         "origin": {
           "Table": {
-            "table": "terms",
+            "table": "lemmas",
             "name": "id"
           }
         }
@@ -17,13 +17,12 @@
     ],
     "parameters": {
       "Left": [
-        "Int4",
-        "Text"
+        "Int4"
       ]
     },
     "nullable": [
       false
     ]
   },
-  "hash": "ac7849f2c3874572bff097d2218f9f95b68c54cb629319d1a3c6c735d150b456"
+  "hash": "7a8a0458d8e08e9d6f5500a225b4c12040d7c5324efcf0331641c6dfa22d39f3"
 }

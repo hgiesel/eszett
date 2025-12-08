@@ -1,10 +1,11 @@
 use crate::id::IdType;
 
 #[derive(Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Debug, Hash)]
-pub struct LanguageId { pub id: IdType }
 
-impl From<IdType> for LanguageId {
+pub struct LexemeId { pub id: IdType }
+
+impl From<IdType> for LexemeId {
     fn from(id: IdType) -> Self {
-        LanguageId { id }
+        LexemeId { id }
     }
 }
