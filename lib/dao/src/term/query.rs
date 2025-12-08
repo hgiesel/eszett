@@ -1,44 +1,70 @@
 
 use sqlx::{Executor, Postgres};
 use anyhow::Result;
-use super::model::TermId;
+use crate::language::model::LanguageId;
+use super::model::{Term, TermId};
 
-pub async fn insert_term<'a>(exec: impl Executor<'a, Database = Postgres>, language_id: i32, term: &str) -> Result<TermId> {
-    let rec = sqlx::query!(r#"
+pub async fn insert_term<'a>(
+    exec: impl Executor<'a, Database = Postgres>,
+    language_id: impl Into<LanguageId>,
+    term: impl Into<Term>,
+) -> Result<TermId> {
+    let rec = sqlx::query_as!(TermId, r#"
         INSERT INTO terms (language_id, term)
         VALUES ( $1, $2 )
         RETURNING id
-    "#, language_id, term).fetch_one(exec).await?;
-
-    Ok(rec.id.into())
+    "#,
+        language_id.into().id,
+        term.into().term,
+    ).fetch_one(exec).await?;
+    Ok(rec)
 }
 
-pub async fn upsert_term<'a>(exec: impl Executor<'a, Database = Postgres>, language_id: i32, term: &str) -> Result<TermId> {
-    let rec = sqlx::query!(r#"
+pub async fn upsert_term<'a>(
+    exec: impl Executor<'a, Database = Postgres>,
+    language_id: impl Into<LanguageId>,
+    term: impl Into<Term>,
+) -> Result<TermId> {
+    let rec = sqlx::query_as!(TermId, r#"
         INSERT INTO terms (language_id, term)
         VALUES ( $1, $2 )
         ON CONFLICT (language_id, term)
         DO UPDATE SET term = EXCLUDED.term
         RETURNING id
-    "#, language_id, term).fetch_one(exec).await?;
+    "#,
+        language_id.into().id,
+        term.into().term,
+    ).fetch_one(exec).await?;
 
-    Ok(rec.id.into())
+    Ok(rec)
 }
 
-pub async fn filter_terms<'a>(pool: impl Executor<'a, Database = Postgres>, language_id: i32) -> Result<Vec<String>> {
-    let rec = sqlx::query!(r#"
+pub async fn filter_terms<'a>(
+    exec: impl Executor<'a, Database = Postgres>,
+    language_id: impl Into<LanguageId>,
+) -> Result<Vec<Term>> {
+    let rec = sqlx::query_as!(Term, r#"
         SELECT term FROM terms
         WHERE language_id = $1 
-    "#, language_id).fetch_all(pool).await?;
-    Ok(rec.into_iter().map(|x| x.term).collect())
+    "#,
+        language_id.into().id
+    ).fetch_all(exec).await?;
+    Ok(rec)
 }
 
-pub async fn find_term<'a>(exec: impl Executor<'a, Database = Postgres>, language_id: i32, term: &str) -> Result<TermId> {
+pub async fn find_term<'a>(
+    exec: impl Executor<'a, Database = Postgres>,
+    language_id: impl Into<LanguageId>,
+    term: impl Into<Term>,
+) -> Result<TermId> {
     let rec = sqlx::query_as!(TermId, r#"
         SELECT id FROM terms
         WHERE language_id = $1
         AND term = $2
-    "#, language_id, term).fetch_one(exec).await?;
+    "#,
+        language_id.into().id,
+        term.into().term,
+    ).fetch_one(exec).await?;
     Ok(rec)
 }
 
