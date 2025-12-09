@@ -70,13 +70,13 @@ pub fn format_files(path: &Path, map: LexemeMap) -> Result<()> {
     //     .expect("collator");
     // //, CollatorOptions::newk()).unwrap();
     //
-    println!("{:#?}", collator);
+    // println!("{:#?}", collator);
 
-    for key in map.map.keys() {
-        key
-
-
-    }
+    // for key in map.map.keys() {
+    //     key
+    //
+    //
+    // }
 
 
     categorize::<Language>();
