@@ -5,11 +5,11 @@ use crate::lexeme_map::{LexemeMap, EMPTY_LEXEMES};
 use crate::read_files::read_files;
 
 pub trait ReadLexemes {
-    fn read_lexemes(self, path: &Path) -> Result<LexemeMap>;
+    fn read_lexemes(&self, path: &Path) -> Result<LexemeMap>;
 }
 
 impl ReadLexemes for Language {
-    fn read_lexemes(self, root: &Path) -> Result<LexemeMap> {
+    fn read_lexemes(&self, root: &Path) -> Result<LexemeMap> {
         match self {
             Language::English => {
                 let path = root.join("data/en");
