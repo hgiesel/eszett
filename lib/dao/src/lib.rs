@@ -4,3 +4,4 @@ pub mod language;
 mod id;
 pub mod part_of_speech;
 pub mod term;
+mod connector;

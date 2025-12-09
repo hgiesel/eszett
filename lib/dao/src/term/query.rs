@@ -1,78 +1,80 @@
-
-use sqlx::{Executor, Postgres};
+use sqlx::{PgConnection, PgPool};
 use anyhow::Result;
-use crate::language::id::LanguageId;
+use crate::id::IdType;
+use crate::language::dao::LanguageDao;
 use super::model::{Term, TermId};
+use crate::connector::Connector;
 
 pub async fn insert_term<'a>(
-    exec: impl Executor<'a, Database = Postgres>,
-    language_id: impl Into<LanguageId>,
+    conn: impl Connector<'a>,
+    language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<TermId> {
+    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(TermId, r#"
-        INSERT INTO terms (language_id, term)
-        VALUES ( $1, $2 )
-        RETURNING id
-    "#,
-        language_id.into().id,
-        term.into().term,
-    ).fetch_one(exec).await?;
+    INSERT INTO terms (language_id, term)
+    VALUES ( $1, $2 )
+    RETURNING id
+"#,
+    language_id.into() as IdType,
+    term.into().term,
+).fetch_one(conn).await?;
     Ok(rec)
 }
 
 pub async fn upsert_term<'a>(
-    exec: impl Executor<'a, Database = Postgres>,
-    language_id: impl Into<LanguageId>,
+    conn: impl Connector<'a>,
+    language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<TermId> {
+    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(TermId, r#"
-        INSERT INTO terms (language_id, term)
-        VALUES ( $1, $2 )
-        ON CONFLICT (language_id, term)
-        DO UPDATE SET term = EXCLUDED.term
-        RETURNING id
-    "#,
-        language_id.into().id,
-        term.into().term,
-    ).fetch_one(exec).await?;
-
+    INSERT INTO terms (language_id, term)
+    VALUES ( $1, $2 )
+    ON CONFLICT (language_id, term)
+    DO UPDATE SET term = EXCLUDED.term
+    RETURNING id
+"#,
+    language_id.into() as IdType,
+    term.into().term,
+).fetch_one(conn).await?;
     Ok(rec)
 }
 
 pub async fn filter_terms<'a>(
-    exec: impl Executor<'a, Database = Postgres>,
-    language_id: impl Into<LanguageId>,
+    conn: impl Connector<'a>,
+    language_id: impl Into<LanguageDao>,
 ) -> Result<Vec<Term>> {
+    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(Term, r#"
-        SELECT term FROM terms
-        WHERE language_id = $1 
-    "#,
-        language_id.into().id
-    ).fetch_all(exec).await?;
+    SELECT term FROM terms
+    WHERE language_id = $1
+"#,
+    language_id.into() as IdType,
+).fetch_all(conn).await?;
     Ok(rec)
 }
 
 pub async fn find_term<'a>(
-    exec: impl Executor<'a, Database = Postgres>,
-    language_id: impl Into<LanguageId>,
+    conn: impl Connector<'a>,
+    language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
-) -> Result<TermId> {
+) -> Result<Option<TermId>> {
+    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(TermId, r#"
-        SELECT id FROM terms
-        WHERE language_id = $1
-        AND term = $2
-    "#,
-        language_id.into().id,
-        term.into().term,
-    ).fetch_one(exec).await?;
+    SELECT id FROM terms
+    WHERE language_id = $1
+    AND term = $2
+"#,
+    language_id.into() as IdType,
+    term.into().term,
+).fetch_optional(conn).await?;
     Ok(rec)
 }
 
 #[tokio::test]
 async fn finds_a_word() {
-    let pool = crate::connection::init_pool().await;
-    let mut tr = pool.begin().await.unwrap();
-    let x = find_term(tr.as_mut(), 1, "eat").await.unwrap();
-    tr.commit().await.unwrap();
-    assert_eq!(x, 452115.into());
+    let pool = crate::connection::get_pool().await;
+    let x = find_term(pool, LanguageDao::English, "cat").await.unwrap();
+    assert_eq!(x, None.into());
 }

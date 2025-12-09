@@ -1,2 +1,1 @@
-pub mod id;
-mod dao;
+pub mod dao;

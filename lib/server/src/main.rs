@@ -1,6 +1,7 @@
 mod term;
 mod reference;
 mod language;
+mod connector;
 
 use axum::{
     routing::{get, post},
