@@ -5,7 +5,7 @@ use serde_yaml::Value;
 use crate::lexeme_meta::LexemeMeta;
 
 #[derive(Debug)]
-pub struct LexemeMap(pub BTreeMap<String, Vec<LexemeMeta>>);
+pub struct LexemeMap { pub map: BTreeMap<String, Vec<LexemeMeta>> }
 
 impl TryFrom<&Value> for LexemeMap {
     type Error = Error;
@@ -34,7 +34,7 @@ impl TryFrom<&Value> for LexemeMap {
             map.insert(key, items);
         }
 
-        Ok(LexemeMap(map))
+        Ok(LexemeMap { map })
     }
 }
 
@@ -43,13 +43,13 @@ impl From<Vec<LexemeMap>> for LexemeMap {
         let mut merged = BTreeMap::new();
 
         for map in value {
-            for (key, vec) in map.0 {
+            for (key, vec) in map.map {
                 merged.entry(key)
                     .and_modify(|existing_vec: &mut Vec<LexemeMeta>| existing_vec.extend(vec.clone()))
                     .or_insert(vec);
             }
         }
 
-        LexemeMap(merged)
+        LexemeMap {map: merged}
     }
 }

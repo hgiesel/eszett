@@ -1,11 +1,8 @@
 [package]
-name = "eszett-base"
+name = "base"
 version = "0.0.0"
 edition = "2024"
 description = "Contains data types handled by lib"
 repository = "https://github.com/hgiesel/eszett/lib/base"
 license = "MIT"
 publish = false
-
-[lib]
-name = "eszett_base"

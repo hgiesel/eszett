@@ -1,5 +1,5 @@
 use std::fs;
-use project_root::get_project_root;
+use std::path::PathBuf;
 use serde_yaml::Value;
 use anyhow::{anyhow, bail, Result};
 use glob::glob;
@@ -9,10 +9,9 @@ mod part_of_speech;
 mod lexeme_meta;
 mod lexeme_map;
 
-pub fn read_files() -> Result<LexemeMap> {
-    let mut root = get_project_root()?;
+pub fn read_files(root: &mut PathBuf) -> Result<LexemeMap> {
     root.push("data/en");
-
+    println!("Start reading {:?}", root);
     let pattern = root.join("*.yaml");
     let pattern_str = pattern.to_str().ok_or_else(|| anyhow!("Invalid path"))?;
 

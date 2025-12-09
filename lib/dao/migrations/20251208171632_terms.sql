@@ -3,6 +3,11 @@ CREATE TABLE IF NOT EXISTS languages (
     CONSTRAINT languages_pkey PRIMARY KEY (id)
 );
 
+INSERT INTO languages DEFAULT VALUES; -- English
+INSERT INTO languages DEFAULT VALUES; -- Spanish
+INSERT INTO languages DEFAULT VALUES; -- French
+INSERT INTO languages DEFAULT VALUES; -- Italian
+
 CREATE TABLE IF NOT EXISTS parts_of_speech (
     id SERIAL,
     language_id INTEGER NOT NULL REFERENCES languages(id) ON DELETE CASCADE,

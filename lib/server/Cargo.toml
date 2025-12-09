@@ -1,5 +1,5 @@
 [package]
-name = "eszett-server"
+name = "server"
 version = "0.1.0"
 edition = "2024"
 description = "Server for eszett"
@@ -8,8 +8,13 @@ license = "MIT"
 publish = false
 
 [dependencies]
-tokio = { workspace = true }
+anyhow = { workspace = true }
 axum = { workspace = true }
-serde = { workspace = true }
-tracing-subscriber = { workspace = true }
+base = { workspace = true }
 dao = { workspace = true }
+serde = { workspace = true }
+futures = { workspace = true }
+reference = { workspace = true }
+project-root = { workspace = true }
+tracing-subscriber = { workspace = true }
+tokio = { workspace = true }

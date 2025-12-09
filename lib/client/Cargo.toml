@@ -1,5 +1,5 @@
 [package]
-name = "eszett-client"
+name = "client"
 version = "0.1.0"
 edition = "2024"
 description = "Client for querying Eszett Lib"
@@ -11,12 +11,7 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-eszett-base = { workspace = true }
-js-sys = { workspace = true }
 tsify = { workspace = true }
 wasm-bindgen = { workspace = true }
 wasm-bindgen-futures = { workspace = true }
 web-sys = { workspace = true }
-
-[dev-dependencies]
-wasm-bindgen-test = { workspace = true }

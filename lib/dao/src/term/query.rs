@@ -1,7 +1,7 @@
 
 use sqlx::{Executor, Postgres};
 use anyhow::Result;
-use crate::language::model::LanguageId;
+use crate::language::id::LanguageId;
 use super::model::{Term, TermId};
 
 pub async fn insert_term<'a>(

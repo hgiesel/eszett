@@ -11,9 +11,9 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+base = { workspace = true }
 tokio = { workspace = true }
 sqlx = { workspace = true }
-eszett-base = { workspace = true }
 wasm-bindgen = { workspace = true }
 
 [dev-dependencies]

@@ -1,4 +1,6 @@
 mod term;
+mod reference;
+mod language;
 
 use axum::{
     routing::{get, post},
@@ -44,10 +46,11 @@ async fn create_user(
 
 
 #[tokio::main]
-async fn main() {
+async fn main() -> anyhow::Result<()> {
     // initialize tracing
     tracing_subscriber::fmt::init();
 
+    reference::initialize().await?;
 
     // build our application with a route
     let app = Router::new()
@@ -60,5 +63,7 @@ async fn main() {
 
     // run our app with hyper, listening globally on port 3000
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app).await?;
+
+    Ok(())
 }
