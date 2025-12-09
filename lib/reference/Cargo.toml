@@ -8,7 +8,10 @@ license = "MIT"
 publish = false
 
 [dependencies]
+anyhow = { workspace = true }
+base = { workspace = true }
 glob = { workspace = true }
 serde_yaml = { workspace = true }
+serde_json = { workspace = true }
 project-root = { workspace = true }
-anyhow = { workspace = true }
+icu = { workspace = true }

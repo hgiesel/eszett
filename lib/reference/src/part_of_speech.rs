@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use std::str::FromStr;
 use anyhow::{anyhow, Error};
 
@@ -18,5 +19,16 @@ impl FromStr for PartOfSpeech {
             "adj" => Ok(PartOfSpeech::Adjective),
             _ => Err(anyhow!("Unknown English part-of-speech: {}", s)),
         }
+    }
+}
+
+impl Display for PartOfSpeech {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let str = match self {
+            PartOfSpeech::Noun => String::from("noun"),
+            PartOfSpeech::Verb => String::from("verb"),
+            PartOfSpeech::Adjective => String::from("adj"),
+        };
+        write!(f, "{}", str)
     }
 }

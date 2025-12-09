@@ -1,11 +1,17 @@
 use std::collections::BTreeMap;
 use std::convert::TryFrom;
+use std::fmt;
 use anyhow::{Error, anyhow};
+use serde_json::to_string;
 use serde_yaml::Value;
 use crate::lexeme_meta::LexemeMeta;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct LexemeMap { pub map: BTreeMap<String, Vec<LexemeMeta>> }
+
+pub const EMPTY_LEXEMES: LexemeMap = LexemeMap {
+    map: BTreeMap::new(),
+};
 
 impl TryFrom<&Value> for LexemeMap {
     type Error = Error;
@@ -50,6 +56,28 @@ impl From<Vec<LexemeMap>> for LexemeMap {
             }
         }
 
-        LexemeMap {map: merged}
+        LexemeMap { map: merged }
+    }
+}
+
+
+impl fmt::Display for LexemeMap {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        for (lemma, lexemes) in &self.map {
+            writeln!(f, "{}:", to_string(lemma).expect("Lemma string conversion failed: {}"))?;
+
+            for lexeme in lexemes {
+                writeln!(f, "- [{}, {}{}]:", lexeme.part_of_speech, format!("[{}]", lexeme.indicators.iter()
+                    .map(|s| to_string(s).expect("Indicator string conversion failed"))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+                ), if let Some(value) = &lexeme.comment {
+                    format!(", {}", to_string(&value).expect("Comment string conversion failed"))
+                } else {
+                    String::from("")
+                })?
+            }
+        }
+        Ok(())
     }
 }

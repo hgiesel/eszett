@@ -1,9 +1,11 @@
 use project_root::get_project_root;
-use reference::read_files;
+use base::language::Language;
+use reference::read_lexemes::ReadLexemes;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut root = get_project_root()?;
-    let x= read_files(&mut root)?;
-    println!("{:?}", x);
+    let x = Language::English.read_lexemes(&mut root)?;
+    println!("{:#?}", x);
+    println!("{}", x);
     Ok(())
 }

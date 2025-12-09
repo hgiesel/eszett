@@ -7,7 +7,7 @@
 "add":
 - ["verb", []]
 "advise":
-- ["verb", []]
+- ["verb", [], "advise a friend"]
 "accelerate":
 - ["verb", []]
 "affect":
@@ -16,7 +16,7 @@
 - ["verb", []]
 "address":
 - ["noun", []]
-- ["verb", ["past=addrest", "past_qual=obsolete"]]
+- [verb, ["past=addrest", "past_qual=obsolete"]]
 "allow":
 - [ "verb", [ ] ]
 "ability":

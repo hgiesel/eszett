@@ -1,16 +1,17 @@
-use reference::read_files;
 use anyhow::Result;
 use dao::connection::get_pool;
 use dao::lemma::query::upsert_lemma;
 use futures::future::join_all;
 use project_root::get_project_root;
+use base::language::Language;
 use dao::language::dao::LanguageDao;
 use dao::term::query::upsert_term;
+use reference::read_lexemes::ReadLexemes;
 
 pub async fn initialize() -> Result<()>{
     let mut root = get_project_root()?;
     root.push("reference");
-    let map = read_files(&mut root)?;
+    let map = Language::English.read_lexemes(&mut root)?;
     let pool = get_pool().await;
 
     println!("Start upserted lemma: {:?}", map);

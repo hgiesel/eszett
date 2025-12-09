@@ -1,4 +1,3 @@
-use std::result;
 use sqlx::{PgPool, Acquire, Postgres, PgConnection};
 
 pub trait Connector<'a> : Acquire<'a, Database = Postgres> + Sized {
