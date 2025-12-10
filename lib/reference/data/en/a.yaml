@@ -1,40 +1,41 @@
 "abide":
-- [verb, ["+", "+", "abode", "past=+", "past=abid", "past_ptc=++", "past_ptc=abidden", "past_ptc_qual=rare"]]:
+- [verb, ["+", "+", "abode", "past=+", "past=abid", "past_ptc=++", "past_ptc=abidden", "past_ptc_qual=rare"]]
 "ability":
-- [noun, ["~"]]:
+- [noun, ["~"]]
 "able":
-- [adj, ["er"]]:
+- [adj, ["er"]]
 "accelerate":
-- [verb, []]:
+- [verb, []]
 "accept":
-- [verb, []]:
+- [verb, []]
 "accident":
-- [noun, ["~"]]:
+- [noun, ["~"]]
 "add":
-- [verb, []]:
+- [verb, []]
 "address":
-- [noun, []]:
-- [verb, ["past=addrest", "past_qual=obsolete"]]:
+- [noun, []]
+- [verb, ["past=addrest", "past_qual=obsolete"]]
 "adventure":
-- [noun, ["~"]]:
-- [verb, []]:
+- [noun, ["~"]]
+- [verb, []]
 "advise":
-- [verb, [], "advise a friend"]:
+- [verb, [], "advise a friend"]
 "affect":
-- [verb, []]:
+- [verb, []]
 "allow":
-- [verb, []]:
+- [verb, []]
 "amount":
-- [noun, []]:
-- [verb, []]:
+- [noun, []]
+- [verb, []]
 "angry":
-- [adj, ["er", "more"]]:
+- [adj, ["er", "more"]]
 "anxious":
-- [noun, ["-"]]:
+- [noun, ["-"]]
 "apple":
-- [noun, []]:
+- [noun, []]
 "argument":
-- [noun, ["~"]]:
+- [noun, ["~"]]
 "author":
-- [noun, []]:
-- [verb, []]:
+- [noun, []]
+- [verb, []]
+"axolotl":

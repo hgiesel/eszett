@@ -10,6 +10,7 @@ use icu::collator::options::{CollatorOptions, Strength};
 use unicode_segmentation::UnicodeSegmentation;
 
 #[derive(Clone, PartialOrd, Ord, PartialEq, Eq)]
+#[allow(unused)]
 pub enum LatinCharacterClass {
     A, B, C, D, E, F, G,
     H, I, J, K, L, M, N,

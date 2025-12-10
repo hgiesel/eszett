@@ -28,12 +28,14 @@ impl TryFrom<&Value> for LexemeMap {
                 .ok_or_else(|| anyhow!("Key is not a string"))?
                 .to_string();
 
+
             let items = match v {
                 Value::Null => Vec::new(),
                 Value::Sequence(seq) => seq
                     .into_iter()
                     .map(|v| v.try_into())
-                    .collect::<anyhow::Result<_>>()?,
+                    .collect::<anyhow::Result<_>>()
+                    .expect(format!("Could not convert value to vec: {}", key).as_str()),
                 _ => Vec::new(),
             };
 
@@ -67,7 +69,7 @@ impl fmt::Display for LexemeMap {
             writeln!(f, "{}:", to_string(lemma).expect("Lemma string conversion failed: {}"))?;
 
             for lexeme in lexemes {
-                writeln!(f, "- [{}, {}{}]:", lexeme.part_of_speech, format!("[{}]", lexeme.indicators.iter()
+                writeln!(f, "- [{}, {}{}]", lexeme.part_of_speech, format!("[{}]", lexeme.indicators.iter()
                     .map(|s| to_string(s).expect("Indicator string conversion failed"))
                     .collect::<Vec<_>>()
                     .join(", ")
