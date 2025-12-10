@@ -1,40 +1,40 @@
-"apple":
-- [ "noun", []]
-"argument":
-- ["noun", ["~"]]
 "abide":
-- ["verb", ["+", "+", "abode", "past=+", "past=abid", "past_ptc=++", "past_ptc=abidden", "past_ptc_qual=rare"]]
-"add":
-- ["verb", []]
-"advise":
-- ["verb", [], "advise a friend"]
-"accelerate":
-- ["verb", []]
-"affect":
-- ["verb", []]
-"accept":
-- ["verb", []]
-"address":
-- ["noun", []]
-- [verb, ["past=addrest", "past_qual=obsolete"]]
-"allow":
-- [ "verb", [ ] ]
+- [verb, ["+", "+", "abode", "past=+", "past=abid", "past_ptc=++", "past_ptc=abidden", "past_ptc_qual=rare"]]:
 "ability":
-- [ "noun", [ "~" ] ]
-"accident":
-- ["noun", ["~"]]
-"adventure":
-- ["noun", ["~"]]
-- ["verb", []]
-"amount":
-- [ "noun", [ ] ]
-- [ "verb", [ ] ]
-"author":
-- [ "noun", [ ] ]
-- [ "verb", [ ] ]
+- [noun, ["~"]]:
 "able":
-- ["adj", ["er"]]
-"anxious":
-- ["noun", ["-"]]
+- [adj, ["er"]]:
+"accelerate":
+- [verb, []]:
+"accept":
+- [verb, []]:
+"accident":
+- [noun, ["~"]]:
+"add":
+- [verb, []]:
+"address":
+- [noun, []]:
+- [verb, ["past=addrest", "past_qual=obsolete"]]:
+"adventure":
+- [noun, ["~"]]:
+- [verb, []]:
+"advise":
+- [verb, [], "advise a friend"]:
+"affect":
+- [verb, []]:
+"allow":
+- [verb, []]:
+"amount":
+- [noun, []]:
+- [verb, []]:
 "angry":
-- ["adj", ["er", "more"]]
+- [adj, ["er", "more"]]:
+"anxious":
+- [noun, ["-"]]:
+"apple":
+- [noun, []]:
+"argument":
+- [noun, ["~"]]:
+"author":
+- [noun, []]:
+- [verb, []]:
