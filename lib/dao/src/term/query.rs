@@ -5,9 +5,8 @@ use super::term_id::TermId;
 use super::term::Term;
 use crate::connector::Connector;
 
-
-pub async fn insert_term<'a>(
-    conn: impl Connector<'a>,
+pub async fn insert_term<'c, C: Connector<'c>>(
+    conn: C,
     language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<TermId> {
@@ -23,8 +22,8 @@ pub async fn insert_term<'a>(
     Ok(rec)
 }
 
-pub async fn upsert_term<'a>(
-    conn: impl Connector<'a>,
+pub async fn upsert_term<'c, C: Connector<'c>>(
+    conn: C,
     language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<TermId> {
@@ -42,8 +41,8 @@ pub async fn upsert_term<'a>(
     Ok(rec)
 }
 
-pub async fn filter_terms<'a>(
-    conn: impl Connector<'a>,
+pub async fn filter_terms<'a, C: Connector<'a>>(
+    conn: C,
     language_id: impl Into<LanguageDao>,
 ) -> Result<Vec<Term>> {
     let conn = &mut *conn.get_connection().await?;
@@ -56,8 +55,8 @@ pub async fn filter_terms<'a>(
     Ok(rec)
 }
 
-pub async fn find_term<'a>(
-    conn: impl Connector<'a>,
+pub async fn find_term<'a, C: Connector<'a>>(
+    conn: C,
     language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<Option<TermId>> {

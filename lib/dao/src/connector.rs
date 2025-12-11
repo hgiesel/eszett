@@ -1,6 +1,6 @@
 use sqlx::{PgPool, Acquire, Postgres, PgConnection};
 
-pub trait Connector<'a> : Acquire<'a, Database = Postgres> + Sized {
+pub trait Connector<'c> : Acquire<'c, Database = Postgres> + Sized {
     fn get_connection(self) -> impl Future<Output = Result<Self::Connection, sqlx::error::Error>>;
 }
 
@@ -10,7 +10,7 @@ impl Connector<'_> for &PgPool {
     }
 }
 
-impl <'a> Connector<'a> for &'a mut PgConnection {
+impl <'c> Connector<'c> for &'c mut PgConnection {
     async fn get_connection(self) -> Result<Self::Connection, sqlx::error::Error> {
         Ok(&mut *self)
     }
