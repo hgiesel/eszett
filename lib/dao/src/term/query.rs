@@ -1,8 +1,10 @@
 use anyhow::Result;
 use crate::id::IdType;
 use crate::language::dao::LanguageDao;
-use super::model::{Term, TermId};
+use super::term_id::TermId;
+use super::term::Term;
 use crate::connector::Connector;
+
 
 pub async fn insert_term<'a>(
     conn: impl Connector<'a>,
@@ -16,7 +18,7 @@ pub async fn insert_term<'a>(
     RETURNING id
 "#,
     language_id.into() as IdType,
-    term.into().term,
+    term.into().to_string(),
 ).fetch_one(conn).await?;
     Ok(rec)
 }
@@ -35,7 +37,7 @@ pub async fn upsert_term<'a>(
     RETURNING id
 "#,
     language_id.into() as IdType,
-    term.into().term,
+    term.into().to_string(),
 ).fetch_one(conn).await?;
     Ok(rec)
 }
@@ -66,7 +68,7 @@ pub async fn find_term<'a>(
     AND term = $2
 "#,
     language_id.into() as IdType,
-    term.into().term,
+    term.into().to_string(),
 ).fetch_optional(conn).await?;
     Ok(rec)
 }
@@ -74,6 +76,6 @@ pub async fn find_term<'a>(
 #[tokio::test]
 async fn finds_a_word() {
     let pool = crate::connection::get_pool().await;
-    let x = find_term(pool, LanguageDao::English, "cat").await.unwrap();
-    assert_eq!(x, None.into());
+    let term_id = find_term(pool, LanguageDao::English, "cat").await.unwrap();
+    assert!(term_id.is_some());
 }

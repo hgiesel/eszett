@@ -1,6 +1,6 @@
 use sqlx::{Executor, Postgres};
 use anyhow::Result;
-use crate::term::model::TermId;
+use crate::term::term_id::TermId;
 use super::model::{LemmaId};
 
 pub async fn upsert_lemma<'a>(

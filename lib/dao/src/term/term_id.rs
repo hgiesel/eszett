@@ -8,12 +8,3 @@ impl From<IdType> for TermId {
         TermId { id }
     }
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Term { pub term: String }
-
-impl From<&str> for Term {
-    fn from(term: &str) -> Self {
-        Term { term: term.to_string() }
-    }
-}
