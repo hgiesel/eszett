@@ -43,6 +43,7 @@
 		]
 	},
 	"dependencies": {
-		"@hgiesel/eszett-client-web": "^0.1.2"
+		"@hgiesel/eszett-client-web": "^0.1.2",
+		"@hgiesel/eszett-dto": "^0.2.0"
 	}
 }

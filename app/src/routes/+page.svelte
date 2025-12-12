@@ -5,8 +5,29 @@
 
 	import { Counter as CounterC } from "@hgiesel/eszett-client-web"
 	import * as f from "@hgiesel/eszett-client-web"
+	import * as g from "@hgiesel/eszett-dto"
 	import { onMount } from 'svelte';
 
+
+	function myfun2(x: g.LanguageDto.English) {
+
+	}
+
+	function myfun(x: g.LanguageDto) {
+		switch (x) {
+			case "Arabic":
+				break
+
+			case 'French':
+			case 'Spanish':
+			case 'Italian':
+			case 'German':
+			case 'Mandarin':
+			case 'Japanese':
+		}
+
+	}
+	console.log('--- g:')
 	onMount(async () => {
 		f.Foobar.English
 		console.log(await f.query_foo("hgiesel/eszett"))

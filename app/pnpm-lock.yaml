@@ -11,6 +11,9 @@ importers:
       '@hgiesel/eszett-client-web':
         specifier: ^0.1.2
         version: 0.1.2
+      '@hgiesel/eszett-dto':
+        specifier: ^0.2.0
+        version: 0.2.0
     devDependencies:
       '@eslint/compat':
         specifier: ^1.4.0
@@ -286,6 +289,9 @@ packages:
 
   '@hgiesel/eszett-client-web@0.1.2':
     resolution: {integrity: sha512-QRf3nDCYBXbawmQoVv5IQveY2gIh/lBO8x2Ms/zvxFaFkrBTbCEXprR0AD+A6miiBYnTAiPt0K1np9vpn1hD0w==, tarball: https://npm.pkg.github.com/download/@hgiesel/eszett-client-web/0.1.2/a569b347bb514eb85454e2fad361df9d29aa7b2b}
+
+  '@hgiesel/eszett-dto@0.2.0':
+    resolution: {integrity: sha512-kLWCRpT6Mv6R8kEf74ySfPb47YdXyAYWt1japCF7PfTn+feMx7HVCOulZFLrexfXL4WYCSE4W9twRB2lb1Io9w==, tarball: https://npm.pkg.github.com/download/@hgiesel/eszett-dto/0.2.0/f279a2f9fe273745cdc9fce9f4dbd244bff62ac2}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1369,6 +1375,8 @@ snapshots:
   '@fontsource/fira-mono@5.2.7': {}
 
   '@hgiesel/eszett-client-web@0.1.2': {}
+
+  '@hgiesel/eszett-dto@0.2.0': {}
 
   '@humanfs/core@0.19.1': {}
 

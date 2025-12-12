@@ -30,7 +30,7 @@ pub fn term_routes() -> Router {
     language_route(
         Router::new()
             .route("/", get(list_terms))
-            .merge(term_route(LanguageDao::English, Router::new()
+            .merge(term_route(Router::new()
                 .route("/", get(async || (StatusCode::OK, Json(()))))
             ))
     )

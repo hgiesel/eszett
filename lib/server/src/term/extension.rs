@@ -2,21 +2,22 @@ use axum::extract::{Path, Request, State};
 use axum::http::StatusCode;
 use axum::middleware::Next;
 use axum::response::Response;
-use axum::{Router, middleware};
+use axum::{Router, middleware, Extension};
+use base::language::Language;
 use dao::connection::get_pool;
 use dao::language::dao::LanguageDao;
 use dao::term::query::find_term;
 use dao::term::term::Term;
+use crate::language::extractor::ExtractLanguage;
 
 async fn validate_term(
-    State(language): State<LanguageDao>,
+    ExtractLanguage(language): ExtractLanguage,
     Path(term): Path<Term>,
     mut req: Request,
     next: Next,
 ) -> Result<Response, StatusCode> {
     let conn = get_pool().await;
-
-    let found = find_term(conn, language, term.clone()).await;
+    let found = find_term(conn, LanguageDao::English, term.clone()).await;
 
     match found {
         Ok(Some(found)) => {
@@ -29,8 +30,8 @@ async fn validate_term(
     }
 }
 
-pub fn term_route(language: LanguageDao, router: Router) -> Router {
+pub fn term_route(router: Router) -> Router {
     Router::new()
         .nest("/{term}", router)
-        .layer(middleware::from_fn_with_state(language, validate_term))
+        .layer(middleware::from_fn(validate_term))
 }

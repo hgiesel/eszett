@@ -22,17 +22,19 @@ async fn validate_language(
         _ => None,
     };
 
-    if result.is_some() {
-        // State is set up here in the middleware
-        req.extensions_mut().insert(result.unwrap());
-        Ok(next.run(req).await)
-    } else {
-        Err(StatusCode::INTERNAL_SERVER_ERROR)
+    match result {
+        Some(lang) => {
+            req.extensions_mut().insert(lang);
+            Ok(next.run(req).await)
+        }
+        None => {
+            Err(StatusCode::INTERNAL_SERVER_ERROR)
+        }
     }
 }
 
 pub fn language_route(router: Router) -> Router {
     Router::new()
         .nest("/{language}", router)
-        .layer(middleware::from_fn(validate_language))
+        .route_layer(middleware::from_fn(validate_language))
 }
