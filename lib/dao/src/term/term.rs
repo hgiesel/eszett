@@ -1,6 +1,7 @@
 use std::fmt::Display;
+use serde::Deserialize;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 pub struct Term { pub term: String }
 
 impl From<&str> for Term {

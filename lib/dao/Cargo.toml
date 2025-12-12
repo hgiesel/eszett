@@ -18,3 +18,4 @@ dotenvy = { workspace = true }
 sqlx = { workspace = true }
 tokio = { workspace = true }
 async-trait = "0.1.89"
+serde = { version = "1.0.228", features = ["derive"] }

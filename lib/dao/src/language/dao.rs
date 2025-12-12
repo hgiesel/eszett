@@ -1,7 +1,7 @@
 use std::fmt;
 use crate::id::IdType;
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LanguageDao {
     English = 1,
     Spanish,

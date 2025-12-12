@@ -1,11 +1,10 @@
-use std::collections::HashMap;
 use axum::extract::{Path, Request};
 use axum::http::StatusCode;
 use axum::middleware::Next;
 use axum::response::Response;
-use axum::{middleware, Router};
-use serde::Deserialize;
+use axum::{Router, middleware};
 use base::language::Language;
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct LanguageName { language: String }
@@ -20,7 +19,7 @@ async fn validate_language(
         "es" => Some(Language::Spanish),
         "fr" => Some(Language::French),
         "it" => Some(Language::Italian),
-        _ => None
+        _ => None,
     };
 
     if result.is_some() {

@@ -1,15 +1,16 @@
-mod term;
-mod reference;
-mod language;
 mod connector;
+mod language;
+mod lemma;
+mod reference;
+mod term;
 
+use crate::term::route::term_routes;
 use axum::{
-    routing::{get, post},
-    http::StatusCode,
     Json, Router,
+    http::StatusCode,
+    routing::{get, post},
 };
 use serde::{Deserialize, Serialize};
-use crate::term::term_routes;
 
 // the input to our `create_user` handler
 #[derive(Deserialize)]
@@ -44,7 +45,6 @@ async fn create_user(
     // with a status code of `201 Created`
     (StatusCode::CREATED, Json(user))
 }
-
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

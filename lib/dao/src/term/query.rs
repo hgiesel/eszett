@@ -79,6 +79,8 @@ pub async fn find_term(
 #[tokio::test]
 async fn finds_a_word() {
     let pool = crate::connection::get_pool().await;
-    let term_id = find_term(pool, LanguageDao::English, "cat").await.unwrap();
+    let word = "cat";
+    let language = LanguageDao::English;
+    let term_id = find_term(pool, language, word).await.unwrap();
     assert!(term_id.is_some());
 }

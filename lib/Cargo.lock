@@ -283,6 +283,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "dotenvy",
+ "serde",
  "sqlx",
  "tokio",
 ]
