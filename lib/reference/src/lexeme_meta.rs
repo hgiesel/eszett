@@ -1,11 +1,11 @@
 use std::str::FromStr;
 use anyhow::{anyhow, bail, Error, Result};
 use serde_yaml::Value;
-use crate::part_of_speech::PartOfSpeech;
+use dto::part_of_speech::PartOfSpeechDto;
 
 #[derive(Debug, Clone)]
 pub struct LexemeMeta {
-    pub part_of_speech: PartOfSpeech,
+    pub part_of_speech: PartOfSpeechDto,
     pub indicators: Vec<String>,
     pub comment: Option<String>,
 }
@@ -16,7 +16,7 @@ impl TryFrom<&Value> for LexemeMeta {
     fn try_from(value: &Value) -> Result<Self, Self::Error> {
         let seq = value.as_sequence().ok_or_else(|| anyhow!("Expected a sequence"))?;
 
-        let mut part_of_speech: Option<PartOfSpeech> = None;
+        let mut part_of_speech: Option<PartOfSpeechDto> = None;
         let mut indicators: Option<Vec<String>> = None;
         let mut comment: Option<String> = None;
 
@@ -26,7 +26,7 @@ impl TryFrom<&Value> for LexemeMeta {
                     let string = value
                         .as_str()
                         .ok_or_else(|| anyhow!("Expected a string as part-of-speech"))?;
-                    part_of_speech = Some(PartOfSpeech::from_str(string)?);
+                    part_of_speech = Some(string.parse::<PartOfSpeechDto>()?);
                 },
                 1 => {
                     let ind = value

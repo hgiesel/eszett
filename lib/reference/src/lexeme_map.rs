@@ -9,10 +9,6 @@ use crate::lexeme_meta::LexemeMeta;
 #[derive(Debug, Clone)]
 pub struct LexemeMap { pub map: BTreeMap<String, Vec<LexemeMeta>> }
 
-pub const EMPTY_LEXEMES: LexemeMap = LexemeMap {
-    map: BTreeMap::new(),
-};
-
 impl TryFrom<&Value> for LexemeMap {
     type Error = Error;
 

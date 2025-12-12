@@ -1,15 +1,20 @@
 use anyhow::Result;
+use sqlx::PgPool;
 use crate::id::IdType;
 use crate::language::dao::LanguageDao;
 use super::term_id::TermId;
 use super::term::Term;
 use crate::connector::Connector;
 
-pub async fn insert_term<'c, C: Connector<'c>>(
+pub async fn insert_term<'c, C, L, T>(
     conn: C,
     language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
-) -> Result<TermId> {
+) -> Result<TermId> where
+    C: Connector<'c>,
+    L: Into<LanguageDao>,
+    T: Into<Term>,
+{
     let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(TermId, r#"
     INSERT INTO terms (language_id, term)
@@ -41,11 +46,11 @@ pub async fn upsert_term<'c, C: Connector<'c>>(
     Ok(rec)
 }
 
-pub async fn filter_terms<'a, C: Connector<'a>>(
-    conn: C,
+
+pub async fn filter_terms(
+    conn: &PgPool,
     language_id: impl Into<LanguageDao>,
 ) -> Result<Vec<Term>> {
-    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(Term, r#"
     SELECT term FROM terms
     WHERE language_id = $1
@@ -55,12 +60,11 @@ pub async fn filter_terms<'a, C: Connector<'a>>(
     Ok(rec)
 }
 
-pub async fn find_term<'a, C: Connector<'a>>(
-    conn: C,
+pub async fn find_term(
+    conn: &PgPool,
     language_id: impl Into<LanguageDao>,
     term: impl Into<Term>,
 ) -> Result<Option<TermId>> {
-    let conn = &mut *conn.get_connection().await?;
     let rec = sqlx::query_as!(TermId, r#"
     SELECT id FROM terms
     WHERE language_id = $1

@@ -1,41 +1,27 @@
+mod error;
+
 use std::fmt::Display;
 use std::str::FromStr;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use tsify::Tsify;
 use wasm_bindgen::prelude::wasm_bindgen;
 
-// fn serialize_as_display<T, S>(value: &T, serializer: S) -> Result<S::Ok, S::Error>
-// where T: Display, S: Serializer {
-//     serializer.serialize_str(&value.to_string())
-// }
-//
-#[derive(PartialEq, Eq, Debug, Clone, Tsify)]
-// #[tsify(namespace)]
+#[derive(PartialEq, Eq, Debug, Clone, Serialize, Deserialize, Tsify)]
+#[wasm_bindgen]
+#[tsify(namespace)]
 pub enum PartOfSpeechDto {
-    #[tsify(type = "0 | 1 | 2")]
+    #[serde(rename = "noun")]
     Noun,
+    #[serde(rename = "verb")]
     Verb,
+    #[serde(rename = "adj")]
     Adjective,
+    #[serde(rename = "adv")]
     Adverb,
 }
 
-#[test]
-fn foo() {
-    assert_eq!(PartOfSpeechDto::Noun.to_string(), "noun");
-    assert_eq!(PartOfSpeechDto::Adjective.to_string(), "adj");
-}
-
-#[derive(Debug, Deserialize)]
-pub struct InvalidPartOfSpeechCode(String);
-
-impl Display for InvalidPartOfSpeechCode {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Invalid part-of-speech: {}", self.0)
-    }
-}
-
 impl FromStr for PartOfSpeechDto {
-    type Err = InvalidPartOfSpeechCode;
+    type Err = error::InvalidPartOfSpeechCode;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
@@ -43,7 +29,7 @@ impl FromStr for PartOfSpeechDto {
             "verb" => Ok(PartOfSpeechDto::Verb),
             _ if s.len() >= 3 && "adjective".starts_with(s) => Ok(PartOfSpeechDto::Adjective),
             _ if s.len() >= 3 && "adverb".starts_with(s) => Ok(PartOfSpeechDto::Adverb),
-            _ => Err(InvalidPartOfSpeechCode(s.to_string())),
+            _ => Err(error::InvalidPartOfSpeechCode(s.to_string())),
         }
     }
 }
@@ -62,7 +48,20 @@ impl Display for PartOfSpeechDto {
 
 #[cfg(test)]
 mod tests {
+    use serde_json::{json, to_value};
     use super::PartOfSpeechDto;
+
+    #[test]
+    fn display_as_string() {
+        assert_eq!(PartOfSpeechDto::Noun.to_string(), "noun");
+        assert_eq!(PartOfSpeechDto::Adjective.to_string(), "adj");
+    }
+
+    #[test]
+    fn serialize_as_string() {
+        assert_eq!(to_value(&PartOfSpeechDto::Noun).unwrap(), json!("noun"));
+        assert_eq!(to_value(&PartOfSpeechDto::Adjective).unwrap(), json!("adj"));
+    }
 
     #[test]
     fn can_match_adj_any_prefix() {

@@ -7,14 +7,5 @@ repository = "https://github.com/hgiesel/eszett"
 license = "MIT"
 publish = false
 
-[lib]
-crate-type = ["cdylib", "rlib"]
-
 [dependencies]
 base = { workspace = true }
-tokio = { workspace = true }
-sqlx = { workspace = true }
-wasm-bindgen = { workspace = true }
-
-[dev-dependencies]
-wasm-bindgen-test = { workspace = true }
